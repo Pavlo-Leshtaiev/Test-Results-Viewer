@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                echo 'This is a minimal pipeline. To test hooks config 6.'
+                echo 'This is a minimal pipeline. To test hooks config 7.'
             }
         }
     }
