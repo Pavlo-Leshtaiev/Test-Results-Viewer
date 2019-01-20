@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage ('Initialize') {
             steps {
-                echo 'Current path: %PATH%'
+                bat 'echo %PATH%'
                 echo 'Current path: $PATH'
                 echo 'Current path: $Path'
                 sh '''
