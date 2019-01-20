@@ -9,7 +9,7 @@ pipeline {
             steps {
                 echo 'Current path: %PATH%'
                 echo 'Current path: ${PATH}'
-                SET
+                echo 'Current path: ${Path}'
                 sh '''
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
