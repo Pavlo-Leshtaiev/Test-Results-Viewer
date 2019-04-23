@@ -2,19 +2,16 @@ package edu.kilabs.trv.resources;
 
 import java.util.ResourceBundle;
 
-public enum Text {
+public enum ConstantData {
 
-    STATISTICS("statistics"),
-    LANGUAGE("language"),
-    TEST_RESULTS("test_results"),
-    ABOUT("about"),
-    AUTHOR("author");
+    AUTHOR("author"),
+    YEAR("year");
 
     static ResourceBundle bundle = getBundle();
 
     private final String key;
 
-    Text(String resourceKey){
+    ConstantData(String resourceKey){
         this.key = resourceKey;
     }
 
@@ -24,7 +21,7 @@ public enum Text {
     }
 
     private static ResourceBundle getBundle(){
-        return ResourceBundle.getBundle("i18n/main_text");
+        return ResourceBundle.getBundle("constant_data");
     }
 
     public static void refresh(){

@@ -23,6 +23,7 @@ public class TopLevelView extends VerticalLayout {
     public TopLevelView(RootTabs rootTabs) {
 
         add(rootTabs);
+        add(rootTabs.getContents());
 
     }
 
