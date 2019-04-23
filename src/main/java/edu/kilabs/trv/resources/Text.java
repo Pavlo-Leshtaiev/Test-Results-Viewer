@@ -11,7 +11,8 @@ public enum Text {
     AUTHOR("author"),
 
     LANG_ENG("language_english"),
-    LANG_GER("language_german");
+    LANG_GER("language_german"),
+    LANG_RUS("language_russian");
 
     static ResourceBundle bundle = getBundle();
 

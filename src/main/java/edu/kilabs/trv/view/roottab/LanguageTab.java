@@ -27,23 +27,23 @@ public class LanguageTab extends Tab implements RootTabPage {
     public Component getContent() {
         var topLayout = new VerticalLayout();
 
-        var btn = new Button(Text.LANG_ENG.toString());
-        btn.addClickListener((ev) -> {
-            Locale.setDefault(new Locale("en", "US"));
-            Text.refresh();
-            UI.getCurrent().getPage().reload();
-        });
-        topLayout.add(btn);
-
-        btn = new Button(Text.LANG_GER.toString());
-        btn.addClickListener((ev) -> {
-            Locale.setDefault(new Locale("de", "DE"));
-            Text.refresh();
-            UI.getCurrent().getPage().reload();
-        });
-        topLayout.add(btn);
+        addLanguageButton(topLayout, Text.LANG_ENG, "en", "US");
+        addLanguageButton(topLayout, Text.LANG_GER, "de", "DE");
+        addLanguageButton(topLayout, Text.LANG_RUS, "ru", "RU");
 
         return topLayout;
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    private void addLanguageButton(VerticalLayout topLayout, Text buttonText, String language, String country) {
+        Button btn = new Button(buttonText.toString());
+        btn.addClickListener((ev) -> {
+            Locale.setDefault(new Locale(language, country));
+            Text.refresh();
+            UI.getCurrent().getPage().reload();
+        });
+        topLayout.add(btn);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
