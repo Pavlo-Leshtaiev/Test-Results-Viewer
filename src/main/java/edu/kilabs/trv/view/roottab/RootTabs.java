@@ -6,11 +6,10 @@ import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
+import edu.kilabs.trv.services.SdsKeys;
+import edu.kilabs.trv.services.StatePersistenceService;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @SpringComponent
 @UIScope
@@ -20,32 +19,56 @@ public class RootTabs extends Tabs {
 
     private Div pages;
     private Map<Tab, Component> tabsToPages = new HashMap<>();
+    private Map<Tab, TabIndex> tabsToIndex = new HashMap<>();
+    private Map<TabIndex, Tab> indexToTabs = new HashMap<>();
     private Set<Component> pagesShown = new HashSet<>();
+
+    private StatePersistenceService sps;
 
     // -----------------------------------------------------------------------------------------------------------------
 
     public RootTabs(StatisticsTab statisticsTab,
                     LanguageTab languageTab,
                     TestResultsTab testResultsTab,
-                    AboutTab aboutTab){
+                    AboutTab aboutTab,
+                    StatePersistenceService sps){
 
-        this.add(testResultsTab);
-        this.add(statisticsTab);
-        this.add(languageTab);
-        this.add(aboutTab);
+        this.sps = sps;
 
-        initPages(statisticsTab, languageTab, testResultsTab, aboutTab);
+        initPages(testResultsTab, statisticsTab, languageTab, aboutTab);
 
         addSelectedChangeListener(event -> {
-            pagesShown.forEach(page -> page.setVisible(false));
-            pagesShown.clear();
-            Component selectedPage = tabsToPages.get(this.getSelectedTab());
-            selectedPage.setVisible(true);
-            pagesShown.add(selectedPage);
+            switchTabs();
+            saveSelectedTab();
         });
 
-        setSelectedTab(aboutTab);
+        restoreSelectedTab();
 
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    private void restoreSelectedTab() {
+
+        TabIndex currentIndex = sps.getTabIndex(SdsKeys.CURRENT_ROOT_TAB, TabIndex.ABOUT);
+        setSelectedTab(indexToTabs.get(currentIndex));
+
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    private void saveSelectedTab() {
+        sps.save(SdsKeys.CURRENT_ROOT_TAB, tabsToIndex.get(getSelectedTab()));
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    private void switchTabs() {
+        pagesShown.forEach(page -> page.setVisible(false));
+        pagesShown.clear();
+        Component selectedPage = tabsToPages.get(this.getSelectedTab());
+        selectedPage.setVisible(true);
+        pagesShown.add(selectedPage);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -61,10 +84,13 @@ public class RootTabs extends Tabs {
 
         Div pages = new Div();
         for (var tab: tabs) {
+            add(tab);
             Component content = tab.getContent();
             content.setVisible(false);
             pages.add(content);
             tabsToPages.put(tab, content);
+            tabsToIndex.put(tab, tab.getIndex());
+            indexToTabs.put(tab.getIndex(), tab);
         }
         this.pages = pages;
 

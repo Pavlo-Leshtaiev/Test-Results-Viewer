@@ -8,7 +8,10 @@ public enum Text {
     LANGUAGE("language"),
     TEST_RESULTS("test_results"),
     ABOUT("about"),
-    AUTHOR("author");
+    AUTHOR("author"),
+
+    LANG_ENG("language_english"),
+    LANG_GER("language_german");
 
     static ResourceBundle bundle = getBundle();
 
