@@ -1,4 +1,4 @@
-package esw.edu.trv.view;
+package edu.kilabs.trv.view;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.notification.Notification;
@@ -11,4 +11,5 @@ public class MainView extends VerticalLayout {
     public MainView() {
         add(new Button("Click me", e -> Notification.show("Hello Spring+Vaadin user!")));
     }
+
 }

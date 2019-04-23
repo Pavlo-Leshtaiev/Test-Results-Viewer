@@ -1,4 +1,4 @@
-package esw.edu.trv.model;
+package edu.kilabs.trv.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +14,7 @@ public class TestRun {
 
     private ZonedDateTime startTime;
 
-    protected TestRun() {
+    public TestRun() {
     }
 
     public TestRun(ZonedDateTime startTime) {

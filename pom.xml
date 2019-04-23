@@ -43,6 +43,16 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
         </dependency>
+
+        <!-- Test dependencies-->
+
+        <!--<dependency>-->
+            <!--<groupId>com.github.mvysny.kaributesting</groupId>-->
+            <!--<artifactId>karibu-testing-v10</artifactId>-->
+            <!--<version>x.y.z</version>-->
+            <!--<scope>test</scope>-->
+        <!--</dependency>-->
+
     </dependencies>
 
     <dependencyManagement>
@@ -50,7 +60,7 @@
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-bom</artifactId>
-                <version>10.0.10</version>
+                <version>13.0.3</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
