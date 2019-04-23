@@ -4,7 +4,10 @@ import java.util.ResourceBundle;
 
 public enum Text {
 
-    STATISTICS("statistics");
+    STATISTICS("statistics"),
+    LANGUAGE("language"),
+    TEST_RESULTS("test_results"),
+    ABOUT("about");
 
     static ResourceBundle bundle = getBundle();
 
