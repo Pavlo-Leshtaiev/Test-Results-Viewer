@@ -3,6 +3,8 @@ package edu.kilabs.trv.view.roottab;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.spring.annotation.SpringComponent;
@@ -19,6 +21,8 @@ public class LanguageTab extends Tab implements RootTabPage {
 
     public LanguageTab() {
         this.setLabel(Text.LANGUAGE.toString());
+        Icon questionMark = new Icon(VaadinIcon.WRENCH);
+        add(questionMark);
     }
 
     // -----------------------------------------------------------------------------------------------------------------

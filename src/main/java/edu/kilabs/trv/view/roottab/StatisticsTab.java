@@ -1,6 +1,8 @@
 package edu.kilabs.trv.view.roottab;
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.spring.annotation.SpringComponent;
@@ -15,6 +17,8 @@ public class StatisticsTab extends Tab implements RootTabPage {
 
     public StatisticsTab() {
         this.setLabel(Text.STATISTICS.toString());
+        Icon questionMark = new Icon(VaadinIcon.PIE_CHART);
+        add(questionMark);
     }
 
     // -----------------------------------------------------------------------------------------------------------------

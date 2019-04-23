@@ -2,6 +2,8 @@ package edu.kilabs.trv.view.roottab;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
@@ -18,6 +20,8 @@ public class AboutTab extends Tab implements RootTabPage {
 
     public AboutTab() {
         setLabel(Text.ABOUT.toString());
+        Icon questionMark = new Icon(VaadinIcon.QUESTION);
+        add(questionMark);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
