@@ -5,9 +5,12 @@ import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
+import edu.kilabs.trv.model.backend.Statistics;
 import edu.kilabs.trv.resources.Text;
+import edu.kilabs.trv.services.StatisticsService;
 
 @SpringComponent
 @UIScope
@@ -15,7 +18,13 @@ public class StatisticsTab extends Tab implements RootTabPage {
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    public StatisticsTab() {
+    private final StatisticsService statisticsService;
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    public StatisticsTab(StatisticsService statisticsService) {
+        this.statisticsService = statisticsService;
+
         this.setLabel(Text.STATISTICS.toString());
         Icon questionMark = new Icon(VaadinIcon.PIE_CHART);
         add(questionMark);
@@ -25,7 +34,26 @@ public class StatisticsTab extends Tab implements RootTabPage {
 
     @Override
     public Component getContent() {
-        return new VerticalLayout();
+
+        Statistics statistics = statisticsService.getStatistics();
+        var layout = new VerticalLayout();
+
+        addStatisticsField(Text.NUMBER_OF_TESTS, statistics.getNumTests(), layout);
+        addStatisticsField(Text.NUMBER_OF_TEST_RESULTS, statistics.getNumTestResults(), layout);
+        addStatisticsField(Text.NUMBER_OF_PASS_TESTS, statistics.getNumPassTests(), layout);
+        addStatisticsField(Text.NUMBER_OF_FAIL_TESTS, statistics.getNumFailedTests(), layout);
+        addStatisticsField(Text.AVERAGE_PASS_RATE, statistics.getAveragePassRate(), layout);
+
+        return layout;
+
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    private void addStatisticsField(Text text, long value, VerticalLayout layout) {
+        TextField textField = new TextField(text.toString());
+        textField.setValue(String.valueOf(value));
+        layout.add(textField);
     }
 
     // -----------------------------------------------------------------------------------------------------------------

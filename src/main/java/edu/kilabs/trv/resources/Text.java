@@ -10,6 +10,12 @@ public enum Text {
     ABOUT("about"),
     AUTHOR("author"),
 
+    NUMBER_OF_TESTS("number_of_tests"),
+    NUMBER_OF_TEST_RESULTS("number_of_test_results"),
+    NUMBER_OF_PASS_TESTS("number_of_pass_tests"),
+    NUMBER_OF_FAIL_TESTS("number_of_fail_results"),
+    AVERAGE_PASS_RATE("average_pass_rate"),
+
     PLEASE_SELECT_TESTRUN("please_select_testrun"),
     NAME_COLUMN("name_column"),
     RESULT_COLUMN("result_column"),

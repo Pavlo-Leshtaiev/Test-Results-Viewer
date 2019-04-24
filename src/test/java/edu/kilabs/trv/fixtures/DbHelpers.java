@@ -4,8 +4,6 @@ import edu.kilabs.trv.model.db.*;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.LinkedList;
-import java.util.List;
 
 public class DbHelpers {
 
@@ -35,20 +33,17 @@ public class DbHelpers {
     public static TestRun generateSampleTestRunWithTestResults(){
 
         TestRun result = generateSampleTestRun();
-        result.setTestResults(getSampleTestResults());
+        addSampleTestResults(result);
 
         return result;
     }
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    public static List<TestResult> getSampleTestResults() {
+    public static void addSampleTestResults(TestRun testRun) {
 
-        List<TestResult> result = new LinkedList<>();
-        result.add(getSampleTestResult("Sample Test A."));
-        result.add(getSampleTestResult("Sample Test B."));
-
-        return result;
+        testRun.addTestResult(getSampleTestResult("Sample Test A."));
+        testRun.addTestResult(getSampleTestResult("Sample Test B."));
 
     }
 
