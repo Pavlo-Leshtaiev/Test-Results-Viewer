@@ -53,6 +53,7 @@ public class StatisticsTab extends Tab implements RootTabPage {
     private void addStatisticsField(Text text, long value, VerticalLayout layout) {
         TextField textField = new TextField(text.toString());
         textField.setValue(String.valueOf(value));
+        textField.setReadOnly(true);
         layout.add(textField);
     }
 
