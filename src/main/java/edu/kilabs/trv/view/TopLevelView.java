@@ -5,7 +5,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
-import edu.kilabs.trv.model.TestRun;
+import edu.kilabs.trv.model.db.TestRun;
 import edu.kilabs.trv.repository.TestRunRepo;
 import edu.kilabs.trv.view.roottab.RootTabs;
 import org.springframework.beans.factory.annotation.Autowired;

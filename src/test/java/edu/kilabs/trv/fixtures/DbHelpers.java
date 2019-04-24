@@ -1,6 +1,6 @@
 package edu.kilabs.trv.fixtures;
 
-import edu.kilabs.trv.model.*;
+import edu.kilabs.trv.model.db.*;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;

@@ -2,10 +2,12 @@ package edu.kilabs.trv.services;
 
 import edu.kilabs.trv.Application;
 import edu.kilabs.trv.fixtures.DbHelpers;
-import edu.kilabs.trv.model.TestRun;
+import edu.kilabs.trv.model.backend.TestRunNameWithId;
+import edu.kilabs.trv.model.db.TestRun;
 import edu.kilabs.trv.repository.BuildRepo;
 import edu.kilabs.trv.repository.TestRunRepo;
 import edu.kilabs.trv.resources.Text;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,10 +55,17 @@ public class TestRunServiceTest {
 
     // -----------------------------------------------------------------------------------------------------------------
 
+    @Before
+    public void setup(){
+        repo.deleteAll();
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+
     @Test
     public void T000_emptyList(){
 
-        List<String> testRuns = trs.getTestRuns();
+        List<TestRunNameWithId> testRuns = trs.getTestRuns();
         assertTrue("Empty list of test runs should be returned.", testRuns.isEmpty());
 
     }
@@ -74,9 +83,10 @@ public class TestRunServiceTest {
                 run.getBuild().getName(),
                 dateTimeFormatterFactory.get().format(run.getStartTime()));
 
-        List<String> testRuns = trs.getTestRuns();
+        List<TestRunNameWithId> testRuns = trs.getTestRuns();
         assertEquals("One element is expected in the list.", 1, testRuns.size());
-        assertEquals("Incorrect message", expectedResult, testRuns.get(0));
+        assertEquals("Incorrect message", expectedResult, testRuns.get(0).getName());
+        assertEquals("Incorrect message", (long) run.getId(), testRuns.get(0).getId());
 
     }
 

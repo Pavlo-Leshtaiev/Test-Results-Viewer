@@ -1,4 +1,4 @@
-package edu.kilabs.trv.model;
+package edu.kilabs.trv.model.db;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
@@ -22,7 +22,7 @@ public class TestRun {
     @JoinColumn(name = "BUILD_ID", nullable = false)
     private Build build;
 
-    @OneToMany(mappedBy = "testRun")
+    @OneToMany(mappedBy = "testRun", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<TestResult> testResults;
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -73,6 +73,7 @@ public class TestRun {
             testResults = new LinkedList<>();
         }
         testResults.add(testResult);
+        testResult.setTestRun(this);
     }
 
     // -----------------------------------------------------------------------------------------------------------------

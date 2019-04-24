@@ -2,7 +2,7 @@ package edu.kilabs.trv.repository;
 
 import edu.kilabs.trv.Application;
 import edu.kilabs.trv.fixtures.DbHelpers;
-import edu.kilabs.trv.model.TestRun;
+import edu.kilabs.trv.model.db.TestRun;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +37,9 @@ public class TestRunRepoTest {
 
     @Autowired
     private BuildRepo buildRepo;
+
+    @Autowired
+    private TestRepo testRepo;
 
     // -----------------------------------------------------------------------------------------------------------------
 
@@ -75,6 +78,8 @@ public class TestRunRepoTest {
 
         TestRun testRun = DbHelpers.generateSampleTestRunWithTestResults();
         buildRepo.save(testRun.getBuild());
+        testRun.getTestResults().forEach(r -> testRepo.save(r.getTest()));
+
         repo.save(testRun);
 
         Optional<TestRun> retrievedTestRun = repo.findById(testRun.getId());

@@ -11,6 +11,8 @@ public enum Text {
     AUTHOR("author"),
 
     PLEASE_SELECT_TESTRUN("please_select_testrun"),
+    NAME_COLUMN("name_column"),
+    RESULT_COLUMN("result_column"),
 
     LANG_ENG("language_english"),
     LANG_GER("language_german"),

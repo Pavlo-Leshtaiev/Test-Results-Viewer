@@ -1,4 +1,4 @@
-package edu.kilabs.trv.model;
+package edu.kilabs.trv.model.db;
 
 public enum TestResultOutcome {
 

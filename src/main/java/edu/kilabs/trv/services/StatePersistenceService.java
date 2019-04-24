@@ -1,12 +1,14 @@
 package edu.kilabs.trv.services;
 
-import com.vaadin.flow.spring.annotation.SpringComponent;
 import edu.kilabs.trv.view.roottab.TabIndex;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@SpringComponent
+@Service
+@Transactional()
 public class StatePersistenceService {
 
     // -----------------------------------------------------------------------------------------------------------------

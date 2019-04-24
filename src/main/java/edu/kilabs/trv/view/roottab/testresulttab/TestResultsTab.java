@@ -18,12 +18,14 @@ public class TestResultsTab extends Tab implements RootTabPage {
     // -----------------------------------------------------------------------------------------------------------------
 
     private final TestRunSelectionCombobox combobox;
+    private final TestResultGrid grid;
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    public TestResultsTab(TestRunSelectionCombobox combobox) {
+    public TestResultsTab(TestRunSelectionCombobox combobox, TestResultGrid grid) {
 
         this.combobox = combobox;
+        this.grid = grid;
 
         this.setLabel(Text.TEST_RESULTS.toString());
 
@@ -39,6 +41,7 @@ public class TestResultsTab extends Tab implements RootTabPage {
         var result = new VerticalLayout();
         result.setSizeFull();
         result.add(combobox);
+        result.add(grid);
 
         return result;
     }

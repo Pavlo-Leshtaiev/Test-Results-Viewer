@@ -1,4 +1,4 @@
-package edu.kilabs.trv.model;
+package edu.kilabs.trv.model.db;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -15,7 +15,7 @@ public class TestResult {
     @JoinColumn(name = "TEST_RUN_ID", nullable = false)
     private TestRun testRun;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "TEST_ID", nullable = false)
     private Test test;
 

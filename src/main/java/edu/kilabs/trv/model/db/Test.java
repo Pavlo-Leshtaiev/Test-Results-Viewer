@@ -1,31 +1,43 @@
-package edu.kilabs.trv.model;
+package edu.kilabs.trv.model.db;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class Build {
+public class Test {
 
     // -----------------------------------------------------------------------------------------------------------------
 
     @Id
     @GeneratedValue
-    @Column(name = "BUILD_ID", unique = true, nullable = false)
     private Long id;
 
-    private String name;
+    private String testName;
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    public String getName() {
-        return name;
+    public Test(){}
+
+    public Test(String name) {
+        testName = name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTestName() {
+        return testName;
+    }
+
+    public void setTestName(String testName) {
+        this.testName = testName;
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -34,25 +46,25 @@ public class Build {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Build build = (Build) o;
-        return id.equals(build.id) &&
-                Objects.equals(name, build.name);
+        Test test = (Test) o;
+        return id.equals(test.id) &&
+                Objects.equals(testName, test.testName);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, testName);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
 
     @Override
     public String toString() {
-        return "Build{" +
+        return "Test{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", testName='" + testName + '\'' +
                 '}';
     }
 
