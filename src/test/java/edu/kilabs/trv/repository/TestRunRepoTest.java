@@ -9,17 +9,24 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import javax.transaction.Transactional;
+import java.util.Optional;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /*
 
-    000 - insert data test;
+    000 - insert data test
+    001 - read data test, empty test run
+    002 - read data test, test run with test results
 
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {Application.class})
 @WebAppConfiguration
+@Transactional
 public class TestRunRepoTest {
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -34,10 +41,42 @@ public class TestRunRepoTest {
 
         long initialCount = repo.count();
 
-        repo.save(new TestRun());
+        TestRun testRun = DbHelpers.generateSampleTestRun();
+
+        repo.save(testRun);
 
         long acutalCount = repo.count();
         assertEquals("Failed to insert element", initialCount + 1, acutalCount);
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    @Test
+    public void T001_readDataTest(){
+
+        TestRun testRun = DbHelpers.generateSampleTestRun();
+
+        repo.save(testRun);
+
+        Optional<TestRun> retrievedTestRun = repo.findById(testRun.getId());
+        assertTrue("Failed to read test run", retrievedTestRun.isPresent());
+        assertEquals("Failed to restore elements from DB", testRun, retrievedTestRun.get());
+
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    @Test
+    public void T002_readDataTestWithTestResults(){
+
+        TestRun testRun = DbHelpers.generateSampleTestRunWithTestResults();
+
+        repo.save(testRun);
+
+        Optional<TestRun> retrievedTestRun = repo.findById(testRun.getId());
+        assertTrue("Failed to read test run", retrievedTestRun.isPresent());
+        assertEquals("Failed to restore elements from DB", testRun, retrievedTestRun.get());
+
     }
 
     // -----------------------------------------------------------------------------------------------------------------
