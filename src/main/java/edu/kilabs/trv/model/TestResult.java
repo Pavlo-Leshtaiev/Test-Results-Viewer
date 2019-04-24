@@ -91,4 +91,15 @@ public class TestResult {
 
     // -----------------------------------------------------------------------------------------------------------------
 
+    public static TestResult of(Test test, TestResultOutcome result) {
+        TestResult testResult = new TestResult();
+
+        testResult.setTest(test);
+        testResult.setResult(result);
+
+        return testResult;
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+
 }

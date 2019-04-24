@@ -2,6 +2,7 @@ package edu.kilabs.trv.model;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,7 +18,7 @@ public class TestRun {
 
     private ZonedDateTime startTime;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "BUILD_ID", nullable = false)
     private Build build;
 
@@ -63,6 +64,15 @@ public class TestRun {
 
     public void setTestResults(List<TestResult> testResults) {
         this.testResults = testResults;
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    public void addTestResult(TestResult testResult){
+        if (testResults == null) {
+            testResults = new LinkedList<>();
+        }
+        testResults.add(testResult);
     }
 
     // -----------------------------------------------------------------------------------------------------------------

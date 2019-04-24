@@ -1,4 +1,4 @@
-package edu.kilabs.trv.repository;
+package edu.kilabs.trv.fixtures;
 
 import edu.kilabs.trv.model.*;
 
@@ -7,11 +7,11 @@ import java.time.ZonedDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
-class DbHelpers {
+public class DbHelpers {
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    static Build generateSampleBuild(){
+    public static Build generateSampleBuild(){
 
         Build result = new Build();
         result.setName("Sample Build Name");
@@ -21,7 +21,7 @@ class DbHelpers {
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    static TestRun generateSampleTestRun(){
+    public static TestRun generateSampleTestRun(){
 
         TestRun result = new TestRun();
         result.setBuild(generateSampleBuild());
@@ -32,7 +32,7 @@ class DbHelpers {
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    static TestRun generateSampleTestRunWithTestResults(){
+    public static TestRun generateSampleTestRunWithTestResults(){
 
         TestRun result = generateSampleTestRun();
         result.setTestResults(getSampleTestResults());
@@ -42,7 +42,7 @@ class DbHelpers {
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    static List<TestResult> getSampleTestResults() {
+    public static List<TestResult> getSampleTestResults() {
 
         List<TestResult> result = new LinkedList<>();
         result.add(getSampleTestResult("Sample Test A."));
@@ -54,7 +54,7 @@ class DbHelpers {
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    static TestResult getSampleTestResult(String testName) {
+    public static TestResult getSampleTestResult(String testName) {
 
         TestResult result = new TestResult();
         result.setResult(TestResultOutcome.PASS);
@@ -65,7 +65,7 @@ class DbHelpers {
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    static Test getSampleTest(String testName) {
+    public static Test getSampleTest(String testName) {
 
         Test result = new Test();
         result.setTestName(testName);

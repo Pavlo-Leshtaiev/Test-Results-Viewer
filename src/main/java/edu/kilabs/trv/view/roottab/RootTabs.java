@@ -1,15 +1,19 @@
 package edu.kilabs.trv.view.roottab;
 
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
 import edu.kilabs.trv.services.SdsKeys;
 import edu.kilabs.trv.services.StatePersistenceService;
+import edu.kilabs.trv.view.roottab.testresulttab.TestResultsTab;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 @SpringComponent
 @UIScope
@@ -17,7 +21,7 @@ public class RootTabs extends Tabs {
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    private Div pages;
+    private VerticalLayout pages;
     private Map<Tab, Component> tabsToPages = new HashMap<>();
     private Map<Tab, TabIndex> tabsToIndex = new HashMap<>();
     private Map<TabIndex, Tab> indexToTabs = new HashMap<>();
@@ -73,7 +77,7 @@ public class RootTabs extends Tabs {
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    public Div getContents(){
+    public Component getContents(){
         return pages;
     }
 
@@ -82,7 +86,8 @@ public class RootTabs extends Tabs {
     @SafeVarargs
     private <T extends Tab & RootTabPage> void initPages(T... tabs){
 
-        Div pages = new Div();
+        VerticalLayout pages = new VerticalLayout();
+        pages.setSizeFull();
         for (var tab: tabs) {
             add(tab);
             Component content = tab.getContent();

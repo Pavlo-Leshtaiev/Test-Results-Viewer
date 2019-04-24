@@ -18,6 +18,12 @@ public class Test {
 
     // -----------------------------------------------------------------------------------------------------------------
 
+    public Test(){}
+
+    public Test(String name) {
+        testName = name;
+    }
+
     public Long getId() {
         return id;
     }

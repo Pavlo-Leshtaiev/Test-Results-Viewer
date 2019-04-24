@@ -1,6 +1,7 @@
 package edu.kilabs.trv.repository;
 
 import edu.kilabs.trv.Application;
+import edu.kilabs.trv.fixtures.DbHelpers;
 import edu.kilabs.trv.model.TestRun;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,6 +35,9 @@ public class TestRunRepoTest {
     @Autowired
     private TestRunRepo repo;
 
+    @Autowired
+    private BuildRepo buildRepo;
+
     // -----------------------------------------------------------------------------------------------------------------
 
     @Test
@@ -42,7 +46,7 @@ public class TestRunRepoTest {
         long initialCount = repo.count();
 
         TestRun testRun = DbHelpers.generateSampleTestRun();
-
+        buildRepo.save(testRun.getBuild());
         repo.save(testRun);
 
         long acutalCount = repo.count();
@@ -55,7 +59,7 @@ public class TestRunRepoTest {
     public void T001_readDataTest(){
 
         TestRun testRun = DbHelpers.generateSampleTestRun();
-
+        buildRepo.save(testRun.getBuild());
         repo.save(testRun);
 
         Optional<TestRun> retrievedTestRun = repo.findById(testRun.getId());
@@ -70,7 +74,7 @@ public class TestRunRepoTest {
     public void T002_readDataTestWithTestResults(){
 
         TestRun testRun = DbHelpers.generateSampleTestRunWithTestResults();
-
+        buildRepo.save(testRun.getBuild());
         repo.save(testRun);
 
         Optional<TestRun> retrievedTestRun = repo.findById(testRun.getId());
