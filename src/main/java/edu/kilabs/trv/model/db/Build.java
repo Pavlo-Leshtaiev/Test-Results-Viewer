@@ -16,6 +16,7 @@ public class Build {
     @Column(name = "BUILD_ID", unique = true, nullable = false)
     private Long id;
 
+    @Column(unique = true, nullable = false)
     private String name;
 
     // -----------------------------------------------------------------------------------------------------------------

@@ -16,7 +16,7 @@ public class TestRunSelectionCombobox extends ComboBox<TestRunNameWithId> {
     TestRunSelectionCombobox(TestRunService trs, TestResultGrid grid) {
 
         setLabel(Text.PLEASE_SELECT_TESTRUN.toString());
-        setItems(trs.getTestRuns());
+        setItems(trs.getTestRunNames());
         setItemLabelGenerator(TestRunNameWithId::getName);
         setSizeFull();
 

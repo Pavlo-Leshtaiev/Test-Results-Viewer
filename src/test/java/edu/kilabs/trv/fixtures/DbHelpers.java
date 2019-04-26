@@ -23,7 +23,7 @@ public class DbHelpers {
 
         TestRun result = new TestRun();
         result.setBuild(generateSampleBuild());
-        result.setStartTime(ZonedDateTime.now(ZoneId.systemDefault()));
+        result.setStartTime(ZonedDateTime.now(ZoneId.systemDefault()).withNano(0));
 
         return result;
     }

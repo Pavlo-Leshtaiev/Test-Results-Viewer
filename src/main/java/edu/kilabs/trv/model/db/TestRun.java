@@ -2,9 +2,7 @@ package edu.kilabs.trv.model.db;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 public class TestRun {
@@ -23,7 +21,7 @@ public class TestRun {
     private Build build;
 
     @OneToMany(mappedBy = "testRun", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<TestResult> testResults;
+    private List<TestResult> testResults = new ArrayList<>();
 
     // -----------------------------------------------------------------------------------------------------------------
 
@@ -84,9 +82,25 @@ public class TestRun {
         if (o == null || getClass() != o.getClass()) return false;
         TestRun testRun = (TestRun) o;
         return id.equals(testRun.id) &&
-                Objects.equals(startTime, testRun.startTime) &&
+                startTime.equals(testRun.startTime) &&
                 build.equals(testRun.build) &&
-                Objects.equals(testResults, testRun.testResults);
+                listEquals(testResults, testRun.testResults);
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    private <T> boolean listEquals(List<T> current, List<T> other) {
+        if (current == other) return true;
+        if (current == null || other == null) return false;
+        if (current.size() != other.size()) return false;
+        Iterator<T> it1 = current.iterator();
+        Iterator<T> it2 = other.iterator();
+
+        while (it1.hasNext() && it2.hasNext()) {
+            if (!it1.next().equals(it2.next())) return false;
+        }
+
+        return true;
     }
 
     // -----------------------------------------------------------------------------------------------------------------

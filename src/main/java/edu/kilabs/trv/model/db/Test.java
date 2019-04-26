@@ -1,5 +1,6 @@
 package edu.kilabs.trv.model.db;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,8 +13,10 @@ public class Test {
 
     @Id
     @GeneratedValue
+    @Column(name = "TEST_ID", unique = true, nullable = false)
     private Long id;
 
+    @Column(unique = true, nullable = false)
     private String testName;
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -23,6 +26,8 @@ public class Test {
     public Test(String name) {
         testName = name;
     }
+
+    // -----------------------------------------------------------------------------------------------------------------
 
     public Long getId() {
         return id;

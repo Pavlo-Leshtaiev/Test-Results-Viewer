@@ -4,9 +4,6 @@ import edu.kilabs.trv.Application;
 import edu.kilabs.trv.fixtures.DbHelpers;
 import edu.kilabs.trv.model.backend.Statistics;
 import edu.kilabs.trv.model.db.TestRun;
-import edu.kilabs.trv.repository.BuildRepo;
-import edu.kilabs.trv.repository.TestRepo;
-import edu.kilabs.trv.repository.TestRunRepo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,13 +30,7 @@ public class StatisticsServiceTest {
     StatisticsService statisticsService;
 
     @Autowired
-    BuildRepo buildRepo;
-
-    @Autowired
-    TestRunRepo testRunRepo;
-
-    @Autowired
-    TestRepo testRepo;
+    TestRunService trs;
 
     // -----------------------------------------------------------------------------------------------------------------
 
@@ -47,9 +38,7 @@ public class StatisticsServiceTest {
     public void T000_testResultsForId(){
 
         TestRun testRun = DbHelpers.generateSampleTestRunWithTestResults();
-        buildRepo.save(testRun.getBuild());
-        testRun.getTestResults().forEach(r -> testRepo.save(r.getTest()));
-        testRunRepo.save(testRun);
+        trs.persist(testRun);
 
         Statistics statistics = statisticsService.getStatistics();
 

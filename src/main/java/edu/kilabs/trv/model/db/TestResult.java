@@ -15,7 +15,7 @@ public class TestResult {
     @JoinColumn(name = "TEST_RUN_ID", nullable = false)
     private TestRun testRun;
 
-    @ManyToOne()
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "TEST_ID", nullable = false)
     private Test test;
 
@@ -65,7 +65,6 @@ public class TestResult {
         if (o == null || getClass() != o.getClass()) return false;
         TestResult that = (TestResult) o;
         return id.equals(that.id) &&
-                testRun.equals(that.testRun) &&
                 test.equals(that.test) &&
                 result == that.result;
     }
@@ -74,7 +73,7 @@ public class TestResult {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, testRun, test, result);
+        return Objects.hash(id, test, result);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -83,7 +82,6 @@ public class TestResult {
     public String toString() {
         return "TestResult{" +
                 "id=" + id +
-                ", testRun=" + testRun +
                 ", test=" + test +
                 ", result=" + result +
                 '}';

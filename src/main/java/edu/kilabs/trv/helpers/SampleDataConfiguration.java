@@ -1,9 +1,8 @@
 package edu.kilabs.trv.helpers;
 
 import edu.kilabs.trv.model.db.*;
-import edu.kilabs.trv.repository.BuildRepo;
-import edu.kilabs.trv.repository.TestRepo;
-import edu.kilabs.trv.repository.TestRunRepo;
+import edu.kilabs.trv.services.TestRunService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +16,8 @@ public class SampleDataConfiguration {
     // -----------------------------------------------------------------------------------------------------------------
 
     @Bean
-    public CommandLineRunner demoData(TestRunRepo testRunRepo, BuildRepo buildRepo, TestRepo testRepo) {
+    @Qualifier("demoData")
+    public CommandLineRunner demoData(TestRunService testRunService) {
 
         Test testA = new Test("Test A.");
         Test testB = new Test("Test B.");
@@ -54,17 +54,9 @@ public class SampleDataConfiguration {
         sampleTestRun3.addTestResult(TestResult.of(testE, TestResultOutcome.FAIL));
 
         return args -> {
-            buildRepo.save(testBuild);
-
-            testRepo.save(testA);
-            testRepo.save(testB);
-            testRepo.save(testC);
-            testRepo.save(testD);
-            testRepo.save(testE);
-
-            testRunRepo.save(sampleTestRun);
-            testRunRepo.save(sampleTestRun2);
-            testRunRepo.save(sampleTestRun3);
+            testRunService.persist(sampleTestRun);
+            testRunService.persist(sampleTestRun2);
+            testRunService.persist(sampleTestRun3);
         };
 
     }

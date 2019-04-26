@@ -44,15 +44,6 @@
             <artifactId>h2</artifactId>
         </dependency>
 
-        <!-- Test dependencies-->
-
-        <!--<dependency>-->
-            <!--<groupId>com.github.mvysny.kaributesting</groupId>-->
-            <!--<artifactId>karibu-testing-v10</artifactId>-->
-            <!--<version>x.y.z</version>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
-
     </dependencies>
 
     <dependencyManagement>
