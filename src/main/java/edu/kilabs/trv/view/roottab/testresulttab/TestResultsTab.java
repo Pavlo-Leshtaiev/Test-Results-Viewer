@@ -3,6 +3,7 @@ package edu.kilabs.trv.view.roottab.testresulttab;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.spring.annotation.SpringComponent;
@@ -17,14 +18,23 @@ public class TestResultsTab extends Tab implements RootTabPage {
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    private final TestRunSelectionCombobox combobox;
+    private final TestRunNewCombobox testRunNewCombobox;
+    private final TestRunOldCombobox testRunOldCombobox;
     private final TestResultGrid grid;
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    public TestResultsTab(TestRunSelectionCombobox combobox, TestResultGrid grid) {
+    public TestResultsTab(
+              TestRunOldCombobox testRunOldCombobox
+            , TestRunNewCombobox testRunNewCombobox
+            , TestResultGrid grid) {
 
-        this.combobox = combobox;
+        this.testRunOldCombobox = testRunOldCombobox;
+        testRunOldCombobox.setNewCombobox(testRunNewCombobox);
+
+        this.testRunNewCombobox = testRunNewCombobox;
+        testRunNewCombobox.setOldCombobox(testRunOldCombobox);
+        testRunNewCombobox.setVisible(false);
         this.grid = grid;
 
         this.setLabel(Text.TEST_RESULTS.toString());
@@ -40,7 +50,13 @@ public class TestResultsTab extends Tab implements RootTabPage {
 
         var result = new VerticalLayout();
         result.setSizeFull();
-        result.add(combobox);
+
+        HorizontalLayout testRunSelection = new HorizontalLayout();
+        testRunSelection.setSizeFull();
+        testRunSelection.add(testRunOldCombobox);
+        testRunSelection.add(testRunNewCombobox);
+        result.add(testRunSelection);
+
         result.add(grid);
 
         return result;

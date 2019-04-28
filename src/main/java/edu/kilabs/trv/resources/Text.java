@@ -17,8 +17,12 @@ public enum Text {
     AVERAGE_PASS_RATE("average_pass_rate"),
 
     PLEASE_SELECT_TESTRUN("please_select_testrun"),
+    COMPARE_WITH_RUN("compare_with_run"),
     NAME_COLUMN("name_column"),
     RESULT_COLUMN("result_column"),
+    OLD_RESULT_COLUMN("old_result_column"),
+    NEW_RESULT_COLUMN("new_result_column"),
+    COMPARISON_RESULT_COLUMN("comparison_result_column"),
 
     LANG_ENG("language_english"),
     LANG_GER("language_german"),

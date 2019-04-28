@@ -9,11 +9,15 @@ import edu.kilabs.trv.services.TestRunService;
 
 @SpringComponent
 @UIScope
-public class TestRunSelectionCombobox extends ComboBox<TestRunNameWithId> {
+public class TestRunOldCombobox extends ComboBox<TestRunNameWithId> {
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    TestRunSelectionCombobox(TestRunService trs, TestResultGrid grid) {
+    private TestRunNewCombobox newCombobox;
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    TestRunOldCombobox(TestRunService trs, TestResultGrid grid) {
 
         setLabel(Text.PLEASE_SELECT_TESTRUN.toString());
         setItems(trs.getTestRunNames());
@@ -21,13 +25,23 @@ public class TestRunSelectionCombobox extends ComboBox<TestRunNameWithId> {
         setSizeFull();
 
         addValueChangeListener(event -> {
+            newCombobox.setValue(null);
+            grid.toSingleMode();
             if (event.getSource().isEmpty()) {
-                // message.setText("No browser selected");
+                grid.setItems();
+                newCombobox.setVisible(false);
             } else {
                 grid.showRowsForId(event.getValue().getId());
+                newCombobox.setVisible(true);
             }
         });
 
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    public void setNewCombobox(TestRunNewCombobox newCombobox) {
+        this.newCombobox = newCombobox;
     }
 
     // -----------------------------------------------------------------------------------------------------------------
