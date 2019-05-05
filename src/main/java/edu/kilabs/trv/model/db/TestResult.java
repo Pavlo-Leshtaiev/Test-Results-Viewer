@@ -1,5 +1,7 @@
 package edu.kilabs.trv.model.db;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -13,6 +15,7 @@ public class TestResult {
 
     @ManyToOne()
     @JoinColumn(name = "TEST_RUN_ID", nullable = false)
+    @JsonIgnore
     private TestRun testRun;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
@@ -64,8 +67,7 @@ public class TestResult {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TestResult that = (TestResult) o;
-        return id.equals(that.id) &&
-                test.equals(that.test) &&
+        return test.equals(that.test) &&
                 result == that.result;
     }
 
@@ -73,7 +75,7 @@ public class TestResult {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, test, result);
+        return Objects.hash(test, result);
     }
 
     // -----------------------------------------------------------------------------------------------------------------

@@ -81,8 +81,7 @@ public class TestRun {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TestRun testRun = (TestRun) o;
-        return id.equals(testRun.id) &&
-                startTime.equals(testRun.startTime) &&
+        return startTime.equals(testRun.startTime) &&
                 build.equals(testRun.build) &&
                 listEquals(testResults, testRun.testResults);
     }
@@ -107,7 +106,7 @@ public class TestRun {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, startTime, build, testResults);
+        return Objects.hash(startTime, build, testResults);
     }
 
     // -----------------------------------------------------------------------------------------------------------------

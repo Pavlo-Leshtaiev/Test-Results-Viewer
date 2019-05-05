@@ -44,15 +44,14 @@ public class Build {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Build build = (Build) o;
-        return id.equals(build.id) &&
-                Objects.equals(name, build.name);
+        return Objects.equals(name, build.name);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(name);
     }
 
     // -----------------------------------------------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-package edu.kilabs.trv.rest;
+package edu.kilabs.trv.rest.controllers;
 
 import edu.kilabs.trv.model.db.Build;
 import edu.kilabs.trv.repository.BuildRepo;

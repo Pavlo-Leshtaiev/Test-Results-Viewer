@@ -52,15 +52,14 @@ public class Test {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Test test = (Test) o;
-        return id.equals(test.id) &&
-                Objects.equals(testName, test.testName);
+        return Objects.equals(testName, test.testName);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, testName);
+        return Objects.hash(testName);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
