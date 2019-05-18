@@ -10,7 +10,7 @@ public class SeleniumBaseComponent {
     // -----------------------------------------------------------------------------------------------------------------
 
     private final By selector;
-    private WebElement webElement = null;
+    protected WebElement webElement = null;
 
     @Autowired
     private WebDriver webDriver;
@@ -19,6 +19,13 @@ public class SeleniumBaseComponent {
 
     public SeleniumBaseComponent(By selector) {
         this.selector = selector;
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    protected SeleniumBaseComponent(WebElement webElement) {
+        this.selector = null;
+        this.webElement = webElement;
     }
 
     // -----------------------------------------------------------------------------------------------------------------

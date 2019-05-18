@@ -1,28 +1,30 @@
-package edu.trv.selenium.resources;
+package edu.trv.selenium.model.components.icon;
 
-public enum WebComponents {
+import edu.trv.selenium.model.components.SeleniumBaseComponent;
+import org.openqa.selenium.WebElement;
 
-    // -----------------------------------------------------------------------------------------------------------------
-
-      VAADIN_TABS("vaadin-tabs")
-    , VAADIN_TAB("vaadin-tab")
-    , IRON_ICON("iron-icon");
+public class Icon extends SeleniumBaseComponent {
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    private final String value;
+    private static final String ICON_ATTRIBUTE = "icon";
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    WebComponents(String value){
-        this.value = value;
+    public Icon(WebElement iconWebElement) {
+        super(iconWebElement);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    @Override
-    public String toString() {
-        return value;
+    public static Icon of(WebElement webElement) {
+        return new Icon(webElement);
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    public VaadinIconType getIcon(){
+        return VaadinIconType.of(getWebElement().getAttribute(ICON_ATTRIBUTE));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
