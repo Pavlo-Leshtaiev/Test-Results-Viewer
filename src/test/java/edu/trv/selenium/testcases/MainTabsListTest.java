@@ -1,64 +1,36 @@
-package edu.trv.selenium;
+package edu.trv.selenium.testcases;
 
-import edu.trv.Application;
-import edu.trv.fixtures.RestHelpers;
-import edu.trv.selenium.configurations.MainPageConfiguration;
 import edu.trv.selenium.model.components.Tab;
 import edu.trv.selenium.model.components.icon.Icon;
 import edu.trv.selenium.model.components.icon.VaadinIconType;
 import edu.trv.selenium.model.pages.MainPage;
+import edu.trv.selenium.model.pages.MainTabsList;
 import edu.trv.spring.resources.Text;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /*
 
     000 - Check Tabs count
     001 - Check Tabs names
     002 - Check Tabs icons
+    003 - Check Tabs selection
 
- */
-
-@ExtendWith(SpringExtension.class)
-@SpringBootTest(
-      classes = {Application.class, MainPageConfiguration.class}
-    , webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class MainTabsList {
+*/
+public class MainTabsListTest extends AbstractSeleniumTestCase {
 
     // -----------------------------------------------------------------------------------------------------------------
 
     @Autowired
     private MainPage mainPage;
 
-    @Autowired
-    private WebDriver driver;
-
-    @LocalServerPort
-    private int port;
-
     private static boolean init = false;
-
-    // -----------------------------------------------------------------------------------------------------------------
-
-    @BeforeEach
-    void getTab(){
-        if (!init) {
-            driver.get(RestHelpers.toLocalRestUrl(port));
-            init = true;
-        }
-    }
 
     // -----------------------------------------------------------------------------------------------------------------
 
@@ -109,6 +81,27 @@ public class MainTabsList {
         expectedList.add(VaadinIconType.QUESTION);
 
         assertEquals("Incorrect icon names", expectedList ,icons);
+
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    @Test
+    public void T003_tabsSelection(){
+
+        MainTabsList mainTabsList = mainPage.getMainTabsList();
+        List<Tab> tabs = mainTabsList.getTabs();
+
+        var aboutTab = mainTabsList.openAboutTab();
+        assertTrue("About Tab should be selected", aboutTab.isSelected());
+
+        var languageTab = mainTabsList.openLanguageTab();
+        assertTrue("Language Tab should be selected", languageTab.isSelected());
+        assertFalse("About Tab should not be selected", aboutTab.isSelected());
+
+        mainTabsList.openAboutTab();
+        assertFalse("Language Tab should not be selected", languageTab.isSelected());
+        assertTrue("About Tab should be selected", aboutTab.isSelected());
 
     }
 

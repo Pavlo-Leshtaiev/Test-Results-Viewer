@@ -1,52 +1,61 @@
-package edu.trv.selenium.model.components;
+package edu.trv.selenium.model.base;
 
-import edu.trv.selenium.helpers.AttributeConverter;
-import edu.trv.selenium.model.base.Locator;
-import edu.trv.selenium.model.base.SeleniumBaseComponent;
-import edu.trv.selenium.model.components.icon.Icon;
-import edu.trv.selenium.resources.WebComponents;
+import edu.trv.selenium.model.infrastructure.ChromeWebDriverConfiguration;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
-public class Tab extends SeleniumBaseComponent {
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
-    // -----------------------------------------------------------------------------------------------------------------
-
-    private static final String SELECTED = "aria-selected";
-
-    // -----------------------------------------------------------------------------------------------------------------
-
-    private Icon icon;
+public class Locator {
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    public Tab(Locator locator) {
-        super(locator);
-        icon = Icon.of(getLocator().ofChild(By.tagName(WebComponents.IRON_ICON.toString())));
+    private List<By> bys = new LinkedList<>();
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    public Locator(By locator){
+        bys.add(locator);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    public static Tab of(Locator locator) {
-        return new Tab(locator);
+    public Locator(Locator parent, By child){
+        bys.addAll(parent.bys);
+        bys.add(child);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    public String getName() {
-        return getWebElement().getText();
+    public static Locator id(String id) {
+        return new Locator(By.id(id));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    public Icon getIcon() {
-        return icon;
+    public static Locator xpath(String xpath) {
+        return new Locator(By.xpath(xpath));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    public boolean isSelected() {
-        return AttributeConverter.toBool(
-                getWebElement().getAttribute(SELECTED));
+    public Locator ofChild(By locator) {
+        return new Locator(this, locator);
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    public WebElement toWebElement(){
+
+        Iterator<By> iterator = bys.iterator();
+        WebElement element = ChromeWebDriverConfiguration.driver.findElement(iterator.next());
+        while(iterator.hasNext()){
+            element = element.findElement(iterator.next());
+        }
+        return element;
+
     }
 
     // -----------------------------------------------------------------------------------------------------------------

@@ -1,40 +1,46 @@
-package edu.trv.selenium.model.components;
+package edu.trv.selenium.model.base;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class SeleniumBaseComponent {
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    private final By selector;
-    protected WebElement webElement = null;
-
-    @Autowired
-    private WebDriver webDriver;
+    private final Locator locator;
+    private WebElement webElement = null;
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    public SeleniumBaseComponent(By selector) {
-        this.selector = selector;
+    public SeleniumBaseComponent(Locator locator) {
+        this.locator = locator;
     }
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    protected SeleniumBaseComponent(WebElement webElement) {
-        this.selector = null;
-        this.webElement = webElement;
+    public SeleniumBaseComponent(By locator) {
+        this.locator = new Locator(locator);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    public WebElement getWebElement() {
+    protected WebElement getWebElement() {
         if (webElement == null) {
-            webElement = webDriver.findElement(selector);
+            webElement = locator.toWebElement();
         }
         return webElement;
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    public Locator getLocator() {
+        return locator;
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    public void click() {
+        getWebElement().click();
     }
 
     // -----------------------------------------------------------------------------------------------------------------

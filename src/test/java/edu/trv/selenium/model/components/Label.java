@@ -1,30 +1,26 @@
-package edu.trv.selenium.model.components.icon;
+package edu.trv.selenium.model.components;
 
 import edu.trv.selenium.model.base.Locator;
 import edu.trv.selenium.model.base.SeleniumBaseComponent;
 
-public class Icon extends SeleniumBaseComponent {
+public class Label extends SeleniumBaseComponent {
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    private static final String ICON_ATTRIBUTE = "icon";
-
-    // -----------------------------------------------------------------------------------------------------------------
-
-    private Icon(Locator locator) {
+    private Label(Locator locator) {
         super(locator);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    public static Icon of(Locator locator) {
-        return new Icon(locator);
+    public static Label of(Locator locator) {
+        return new Label(locator);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    public VaadinIconType getIcon(){
-        return VaadinIconType.of(getWebElement().getAttribute(ICON_ATTRIBUTE));
+    public String getText() {
+        return getWebElement().getText();
     }
 
     // -----------------------------------------------------------------------------------------------------------------

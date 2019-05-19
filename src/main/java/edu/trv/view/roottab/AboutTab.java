@@ -18,6 +18,13 @@ public class AboutTab extends Tab implements RootTabPage {
 
     // -----------------------------------------------------------------------------------------------------------------
 
+    public static String ID = "_aboutTab";
+    public static final String AUTHOR_LABEL_ID = "_authorLabel";
+    public static final String AUTHOR_NAME_ID = "_authorName";
+    public static final String COPYRIGHT_ID = "_copyright";
+
+    // -----------------------------------------------------------------------------------------------------------------
+
     public AboutTab() {
         setLabel(Text.ABOUT.toString());
         Icon questionMark = new Icon(VaadinIcon.QUESTION);
@@ -30,13 +37,22 @@ public class AboutTab extends Tab implements RootTabPage {
     public Component getContent() {
 
         VerticalLayout aboutTabLayout = new VerticalLayout();
+        aboutTabLayout.setId(ID);
 
         HorizontalLayout authorLine = new HorizontalLayout();
-        authorLine.add(new Label(Text.AUTHOR.toString()));
-        authorLine.add(new Label(ConstantData.AUTHOR.toString()));
+        var label = new Label(Text.AUTHOR.toString());
+        label.setId(AUTHOR_LABEL_ID);
+        authorLine.add(label);
+
+        label = new Label(ConstantData.AUTHOR.toString());
+        label.setId(AUTHOR_NAME_ID);
+        authorLine.add(label);
 
         aboutTabLayout.add(authorLine);
-        aboutTabLayout.add(new Label(ConstantData.YEAR.toString()));
+
+        label = new Label(ConstantData.YEAR.toString());
+        label.setId(COPYRIGHT_ID);
+        aboutTabLayout.add(label);
 
         return aboutTabLayout;
     }

@@ -14,10 +14,15 @@ public class ChromeWebDriverConfiguration {
 
     // -----------------------------------------------------------------------------------------------------------------
 
+    public static ChromeDriver driver;
+
+    // -----------------------------------------------------------------------------------------------------------------
+
     @Bean(destroyMethod = "quit")
     @Scope(SCOPE_SINGLETON)
     public WebDriver getDriver() {
-        return new ChromeDriver();
+        driver = new ChromeDriver();
+        return driver;
     }
 
     // -----------------------------------------------------------------------------------------------------------------

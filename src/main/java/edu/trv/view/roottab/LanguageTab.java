@@ -19,6 +19,10 @@ public class LanguageTab extends Tab implements RootTabPage {
 
     // -----------------------------------------------------------------------------------------------------------------
 
+    public static final String ID = "_languageTab";
+
+    // -----------------------------------------------------------------------------------------------------------------
+
     public LanguageTab() {
         this.setLabel(Text.LANGUAGE.toString());
         Icon questionMark = new Icon(VaadinIcon.WRENCH);
@@ -30,6 +34,7 @@ public class LanguageTab extends Tab implements RootTabPage {
     @Override
     public Component getContent() {
         var topLayout = new VerticalLayout();
+        topLayout.setId(ID);
 
         addLanguageButton(topLayout, Text.LANG_ENG, "en", "US");
         addLanguageButton(topLayout, Text.LANG_GER, "de", "DE");
