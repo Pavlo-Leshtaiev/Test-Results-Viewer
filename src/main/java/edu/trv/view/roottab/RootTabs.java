@@ -8,6 +8,7 @@ import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
 import edu.trv.spring.services.SdsKeys;
 import edu.trv.spring.services.StatePersistenceService;
+import edu.trv.view.roottab.statisticstab.StatisticsTab;
 import edu.trv.view.roottab.testresulttab.TestResultsTab;
 
 import java.util.HashMap;

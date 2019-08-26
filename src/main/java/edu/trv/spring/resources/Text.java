@@ -16,6 +16,9 @@ public enum Text {
     NUMBER_OF_FAIL_TESTS("number_of_fail_results"),
     AVERAGE_PASS_RATE("average_pass_rate"),
 
+    PIE_CHART_LEGEND_PASS("pie_chart_legend_pass"),
+    PIE_CHART_LEGEND_FAIL("pie_chart_legend_fail"),
+
     PLEASE_SELECT_TESTRUN("please_select_testrun"),
     COMPARE_WITH_RUN("compare_with_run"),
     NAME_COLUMN("name_column"),
